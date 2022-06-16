@@ -6,8 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use App\Http\Models\Survey;
+use App\Http\Models\Answer;
+
 
 
 class User extends Authenticatable implements JWTSubject
@@ -19,6 +23,16 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password'
     ];
+
+
+
+    public function surveys(){
+        return $this->hasMany(Survey::class);
+    }
+    
+    public function answers(){
+        return $this->hasMany(Answer::class);
+    }
 
     public function getJWTIdentifier()
     {
