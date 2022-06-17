@@ -1,26 +1,28 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
+import {userContext} from '../Contexts/userContext'
 
 function Header() {
     const navigate = useNavigate();
     const location = useLocation();
-    const [token, setToken] = useState(localStorage.getItem('user_token') || null)
+
+    const {user, setUser} = useContext(userContext);
 
     const login = ()=>{
         navigate('/login')
     }
     const logout = ()=>{
         localStorage.removeItem('user_token')
-        setToken(null)
+        setUser(null)
     }
 
     useEffect(()=>{
-    
-        if(!token && location.pathname === "/addSurvey"){
-            return navigate('/login')
+        console.log(user)
+        if(!user && location.pathname === "/addSurvey"){
+            return navigate('/login', {state: { from: location },  replace:true})
         }
         
-    }, [token])
+    }, [user])
 
     return (
         <div className='header'>
@@ -28,7 +30,7 @@ function Header() {
                 <h1>Survey</h1>
             </div>
             <div className='buttons'>
-                {token ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
+                {user ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
             </div>
         </div>
     )
