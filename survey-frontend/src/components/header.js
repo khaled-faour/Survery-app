@@ -11,6 +11,11 @@ function Header() {
     const login = ()=>{
         navigate('/login')
     }
+
+    const addSurvey = ()=>{
+        navigate('/addSurvey')
+    }
+
     const logout = ()=>{
         localStorage.removeItem('user_token')
         setUser(null)
@@ -30,7 +35,12 @@ function Header() {
                 <h1>Survey</h1>
             </div>
             <div className='buttons'>
-                {user ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
+                {user ? (
+                    <>
+                        <button onClick={addSurvey}>Add Survey</button>
+                        <button onClick={logout}>Logout</button>
+                    </>
+                ): <button onClick={login}>Login</button>}
             </div>
         </div>
     )
