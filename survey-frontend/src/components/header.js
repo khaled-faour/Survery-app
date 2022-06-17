@@ -6,7 +6,9 @@ function Header() {
     const location = useLocation();
     const [token, setToken] = useState(localStorage.getItem('user_token') || null)
 
-
+    const login = ()=>{
+        navigate('/login')
+    }
     const logout = ()=>{
         localStorage.removeItem('user_token')
         setToken(null)
@@ -14,11 +16,8 @@ function Header() {
 
     useEffect(()=>{
     
-        if(!token && location.pathname !== "/login"){
-            console.log("moving")
+        if(!token && location.pathname === "/addSurvey"){
             return navigate('/login')
-        }else if(token && location.pathname !== "/"){
-            return navigate('/')
         }
         
     }, [token])
@@ -29,7 +28,7 @@ function Header() {
                 <h1>Survey</h1>
             </div>
             <div className='buttons'>
-                {token && <button onClick={logout}>Logout</button>}
+                {token ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
             </div>
         </div>
     )
