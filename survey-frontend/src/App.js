@@ -11,6 +11,10 @@ const App = () => {
   const [user, setUser] = useState(localStorage.getItem('user_token') || null)
   const [questions, setQuestions] = useState([])
 
+
+  useEffect(()=>{
+    console.log(questions)
+  }, [questions])
   return (
     <div className="App">
       <userContext.Provider value={{user, setUser}}>

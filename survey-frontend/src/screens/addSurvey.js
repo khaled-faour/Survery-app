@@ -25,10 +25,16 @@ const AddSurvey = () => {
         }
     }
 
+    const addSurvey = ()=>{
+        console.log("posting: ", questions)
+    }
+
   return (
     <div>
-        <button onClick={()=>addQuestion('text')}>Add Text Question</button>
-        <button onClick={()=>addQuestion('choice')}>Add Choices Question</button>
+        <div className='add-questions-btns'>
+            <button className='add-question-btn' onClick={()=>addQuestion('text')}>Text</button>
+            <button className='add-question-btn' onClick={()=>addQuestion('choice')}>Choices</button>
+        </div>
         {
             questions.length > 0 ? questions.map((question, index)=>{
                 switch(question.type){
@@ -40,6 +46,7 @@ const AddSurvey = () => {
             })
             : "No Questions Selected"
         }
+        {questions.length > 0 && <button className='btn' onClick={addSurvey}>Save</button>}
     </div>
   )
 }

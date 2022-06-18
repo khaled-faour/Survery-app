@@ -25,15 +25,23 @@ function SingleChoiceQuestion({index}) {
         setQuestions(questions.filter((question, i)=> index !== i));
     }
 
+    const onChange = (e)=>{
+        let temp_questions = [...questions];
+        temp_questions[index][e.target.name] = e.target.value
+        setQuestions(temp_questions)
+    }
+
     const changeType = (e)=>{
         let temp_questions = [...questions];
         temp_questions[index][e.target.name] = e.currentTarget.checked;
         setQuestions(temp_questions);
     }
 
-    useEffect(()=>{
-        console.log("All: ", questions)
-    },[questions])
+    const onChoiceChange = (e, i)=>{
+        let temp_questions = [...questions];
+        temp_questions[index]['choices'][i] = e.target.value;
+        setQuestions(temp_questions);
+    }
 
   return (
     <div className='question-component'>
@@ -41,8 +49,8 @@ function SingleChoiceQuestion({index}) {
             <h4 className='title'>{index+1}. Choice Question: </h4>
             <FontAwesomeIcon className='remove-choice-btn' icon={faX} onClick={onDelete}/>
         </div>
-        <input type="text" placeholder='Question'/>
-        <input type="text" placeholder='Description'/>
+        <input type="text" name="question" placeholder='Question' onChange={onChange}/>
+        <input type="text" name="description" placeholder='Description' onChange={onChange}/>
         <div className='choice-type'>
 
             <label><input type="checkbox" name="isMultiple" checked={questions[index].isMultiple} onChange={changeType}/> Multiple</label>
@@ -51,7 +59,7 @@ function SingleChoiceQuestion({index}) {
         <div className='question-choices'>
             {questions[index].choices.map((choice, index)=>(
                 <div key={index} style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                    <input type="text" className='choice-option' value={choice}/>
+                    <input type="text" className='choice-option' value={choice} onChange={(e)=>onChoiceChange(e, index)}/>
                     <FontAwesomeIcon onClick={()=>removeChoice(index)} className='remove-choice-btn' icon={faTrash} />
                 </div>
             ))}
