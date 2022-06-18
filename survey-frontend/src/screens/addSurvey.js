@@ -1,7 +1,9 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {questionsContext} from '../Contexts/questionsContext';
-import TextQuestion from '../components/textQuestion'
-import ChoiceQuestion from '../components/choiceQuestion'
+import TextQuestion from '../components/textQuestion';
+import ChoiceQuestion from '../components/choiceQuestion';
+
+import axios from 'axios'
 
 const QuestionContainer = ({children})=>{
     return (
@@ -13,24 +15,41 @@ const QuestionContainer = ({children})=>{
 
 const AddSurvey = () => {
     const {questions, setQuestions} = useContext(questionsContext)
+    const [surveyTitle, setSurveyTitle] = useState(null)
+
+    const initialQuestion = {
+        type: 'text', 
+        question: null, 
+        description: null, 
+        choices: [], 
+        isMultiple: false, 
+        isDropdown: false,
+    }
 
     const addQuestion = (type)=>{
         switch(type){
             case "text": 
-                setQuestions([...questions, {type: 'text', question: null, description: null}])
+                setQuestions([...questions, {...initialQuestion}])
                 break;
             case "choice":
-                setQuestions([...questions, {type: 'choice', question: null, description: null, choices: ["Choice 1", "Choice 2"], isMultiple: false, isDropdown: false}])
+                setQuestions([...questions, {...initialQuestion, type: 'choice', choices: ["Choice 1", "Choice 2"]}])
                 break;
         }
     }
+    
+    const surveyTitleChange = (e)=>{
+        setSurveyTitle(e.target.value)
+    }
 
-    const addSurvey = ()=>{
-        console.log("posting: ", questions)
+    const addSurvey = async()=>{
+        await axios.post('http://127.0.0.1:8000/api/survey', {surveyTitle, questions }, {headers: {Authorization: 'Bearer ' + localStorage.getItem('user_token')}})
+        .then(response=>console.log("API: ", response.data))
+        // console.log({surveyTitle: surveyTitle, questions})
     }
 
   return (
     <div>
+        <input type={"text"} value={surveyTitle} placeholder="Survey Title" onChange={surveyTitleChange}/>
         <div className='add-questions-btns'>
             <button className='add-question-btn' onClick={()=>addQuestion('text')}>Text</button>
             <button className='add-question-btn' onClick={()=>addQuestion('choice')}>Choices</button>
