@@ -1,9 +1,8 @@
 .App {
   text-align: center;
-
 }
 
-input{
+input[type="text"]{
   height: 50px;
   width: 90%;
   padding: 0 10px;
@@ -13,6 +12,55 @@ input{
   outline: none;
   margin: 10px 0;
 }
+input[type="checkbox"]{
+  height: 20px;
+  width: 20px;
+  border: 1px solid silver;
+}
+.question-header{
+  display: flex;
+}
+.question-container{
+  border: 1px solid black;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+}
+.question-choices{
+  margin: auto;
+  width: calc(90% + 20px);
+}
+
+.choice-option{
+  display: block;
+  width: min-content !important;
+}
+
+.choice-type{
+  width: calc(90% + 20px);
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px
+}
+
+.choice-type label{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.add-choice-btn{
+  display: block;
+  margin: 10px 0 !important
+}
+
+.remove-choice-btn:hover{
+  cursor: pointer;
+  color: #5c1769;
+}
+
 .btn{
   margin-top: 40px;
   margin-bottom: 40px;
@@ -24,6 +72,7 @@ input{
   border-radius: 45px;
   border-radius: 5px;
   background: #5c1769;
+  text-transform: uppercase;
 }
  
 .header{
@@ -90,4 +139,19 @@ input{
 .form .btn:hover{
   background: #491254;
   transition: .5s;
+}
+
+/* .question-component{
+
+} */
+
+.question-component .title{
+  width: calc(90% + 20px);
+  margin: auto;
+  text-align: left;
+}
+.question-component .description{
+  width: 90%;
+  margin: auto;
+  text-align: left;
 }
