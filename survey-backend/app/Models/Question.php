@@ -3,15 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Models\Survey;
-use App\Http\Models\Option;
-use App\Http\Models\Answer;
+use App\Models\Survey;
+use App\Models\Option;
+use App\Models\Answer;
 
 class Question extends Model
 {
-    use HasFactory, SoftDeletingTrait;
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'survey_id',
+        'type',
+        'question',
+        'description',
+        'isMultiple',
+        'isDropdown'
+    ];
 
     public function survey(){
         return $this->belongsTo(Survey::class);

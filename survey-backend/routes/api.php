@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SurveyController;
 
 
 /*
@@ -26,4 +27,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
 
+});
+
+Route::middleware('role.admin')->group(function(){
+    Route::controller(SurveyController::class)->group(function(){
+        Route::post('survey', 'add')->name('survey.add');
+    });
 });

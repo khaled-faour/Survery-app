@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Models\Question;
-use App\Http\Models\User;
+use App\Models\Question;
+use App\Models\User;
 
 class Survey extends Model
 {
-    use HasFactory, SoftDeletingTrait;
+    use HasFactory, SoftDeletes;
 
     public function questions(){
         return $this->hasMany(Question::class);

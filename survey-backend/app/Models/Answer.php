@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Models\Option;
-use App\Http\Models\User;
+use App\Models\Option;
+use App\Models\User;
 
 
 class Answer extends Model
 {
-    use HasFactory, SoftDeletingTrait;
+    use HasFactory, SoftDeletes;
 
     public function option(){
         return $this->belongsTo(Option::class);
