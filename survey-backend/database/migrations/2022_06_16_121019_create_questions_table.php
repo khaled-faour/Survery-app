@@ -15,9 +15,12 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
             $table->foreignID('survey_id')->constrained('surveys');
+            $table->string('question');
+            $table->text('description');
             $table->string('type');
+            $table->boolean("isMultiple");
+            $table->boolean("isDropdown");
             $table->softDeletes();
             $table->timestamps();
         });
