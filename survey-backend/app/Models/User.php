@@ -9,8 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
-use App\Http\Models\Survey;
-use App\Http\Models\Answer;
+use App\Models\Survey;
+use App\Models\Answer;
 
 
 
