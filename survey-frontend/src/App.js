@@ -23,12 +23,11 @@ const App = () => {
             }else{
               localStorage.removeItem('user_token')
             }
-            
         })
     }
 
     checkToken();
-  })
+  }, [])
   return (
     <div className="App">
       <userContext.Provider value={{user, setUser}}>

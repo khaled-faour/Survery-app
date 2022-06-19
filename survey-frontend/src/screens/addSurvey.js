@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {questionsContext} from '../Contexts/questionsContext';
-import TextQuestion from '../components/textQuestion';
-import ChoiceQuestion from '../components/choiceQuestion';
+import TextQuestion from '../components/addSurveyComponents/textQuestion';
+import ChoiceQuestion from '../components/addSurveyComponents/choiceQuestion';
 
 import axios from 'axios'
 
@@ -22,8 +22,8 @@ const AddSurvey = () => {
 
     const initialQuestion = {
         type: 'text', 
-        question: null, 
-        description: null, 
+        question: "", 
+        description: "", 
         choices: [], 
         isMultiple: false, 
         isDropdown: false,

@@ -15,10 +15,13 @@ function Header() {
 
     useEffect(()=>{
         console.log(location.pathname)
+        console.log(user)
         if(!user && (location.pathname !== "/" && location.pathname !== "/login")){
             return navigate('/login', {state: { from: location },  replace:true})
+        }else{
+            return navigate(location.state.from)
         }
-    }, [])
+    }, [user])
 
     return (
         <div className='header'>

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { questionsContext } from '../Contexts/questionsContext';
+import { questionsContext } from '../../Contexts/questionsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons'
 
