@@ -19,7 +19,7 @@ function Header() {
         if(!user && (location.pathname !== "/" && location.pathname !== "/login")){
             return navigate('/login', {state: { from: location },  replace:true})
         }else{
-            return navigate(location.state.from)
+            return navigate(location.state?.from || "/")
         }
     }, [user])
 

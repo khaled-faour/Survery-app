@@ -2,21 +2,15 @@ import React, {useContext, useEffect, useState} from 'react'
 import {questionsContext} from '../Contexts/questionsContext';
 import TextQuestion from '../components/addSurveyComponents/textQuestion';
 import ChoiceQuestion from '../components/addSurveyComponents/choiceQuestion';
+import QuestionContainer from '../components/questionContainer';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios'
-
-const QuestionContainer = ({children})=>{
-    return (
-        <div className='question-container'>
-            {children}
-        </div>
-    )
-}
-
 
 
 
 const AddSurvey = () => {
+    const navigate = useNavigate()
     const {questions, setQuestions} = useContext(questionsContext)
     const [surveyTitle, setSurveyTitle] = useState(null)
 
@@ -46,7 +40,12 @@ const AddSurvey = () => {
 
     const addSurvey = async()=>{
         await axios.post('http://127.0.0.1:8000/api/survey', {surveyTitle, questions }, {headers: {Authorization: 'Bearer ' + localStorage.getItem('user_token')}})
-        .then(response=>console.log("API: ", response.data))
+        .then(response=>{
+            if(response.status === 200){
+                setQuestions([]);
+                navigate('/')
+            }
+        })
         // console.log({surveyTitle: surveyTitle, questions})
     }
 

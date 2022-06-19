@@ -12,7 +12,23 @@ input[type="text"], input[type="password"]{
   outline: none;
   margin: 10px 0;
 }
-input[type="checkbox"]{
+
+select{
+  height: 50px;
+  width: 100%;
+  padding: 0 10px;
+  border-radius: 3px;
+  border: 1px solid silver;
+  font-size: 18px;
+  outline: none;
+  margin: 10px 0;
+}
+
+select[multiple]{
+  height: 200px;
+}
+
+input[type="checkbox"], input[type="radio"]{
   height: 20px;
   width: 20px;
   border: 1px solid silver;
@@ -45,10 +61,9 @@ input[type="checkbox"]{
   gap: 10px
 }
 
-.choice-type label{
+label{
   display: flex;
   align-items: center;
-  font-weight: 500;
 }
 
 .add-choice-btn{
@@ -97,7 +112,38 @@ input[type="checkbox"]{
   background: #5c1769;
   text-transform: uppercase;
 }
- 
+
+.btn:disabled{
+  cursor: default;
+  background-color: grey;
+}
+
+.surveys-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px
+}
+
+.survey-card{
+  width: 500px;
+  margin: 20px 0;
+  border: 2px solid #5c1769;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.card-header{
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 10px;
+}
+
+.card-header h4, h3{
+  margin: 0;
+}
 .header{
   display: flex;
   align-items: center;
@@ -178,3 +224,4 @@ input[type="checkbox"]{
   margin: auto;
   text-align: left;
 }
+

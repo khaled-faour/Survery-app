@@ -3,14 +3,18 @@ import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import {userContext} from './Contexts/userContext';
 import {questionsContext} from './Contexts/questionsContext';
+import {answersContext} from './Contexts/answersContext';
 import Header from './components/header';
 import Login from "./screens/login";
 import AddSurvey from "./screens/addSurvey";
+import TakeSurvey from "./screens/takeSurvey";
+import Home from "./screens/home";
 import axios from 'axios';
 
 const App = () => {
   const [user, setUser] = useState(null)
   const [questions, setQuestions] = useState([])
+  const [answers, setAnswers] = useState([])
 
   
   useEffect(()=>{
@@ -33,7 +37,7 @@ const App = () => {
       <userContext.Provider value={{user, setUser}}>
         <Header/>
         <Routes>
-            <Route path="/" element={<>HOME</>} />
+            <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login/>} />
             
               <Route path="/addSurvey" element={
@@ -42,6 +46,11 @@ const App = () => {
                   </questionsContext.Provider>
               } />
               <Route path="/mySurveys" element={<>My Surveys</>}/>
+                <Route path="/takeSurvey/:id" element={
+                  <answersContext.Provider value={{answers, setAnswers}}>
+                    <TakeSurvey/>
+                  </answersContext.Provider>
+                }/>
         </Routes>
       </userContext.Provider>
     </div>
