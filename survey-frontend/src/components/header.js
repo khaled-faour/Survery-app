@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {useNavigate, useLocation} from 'react-router-dom'
 import {userContext} from '../Contexts/userContext'
+import axios from 'axios'
 
 function Header() {
     const navigate = useNavigate();
@@ -28,7 +29,6 @@ function Header() {
         }
         
     }, [user])
-
     return (
         <div className='header'>
             <div className='title'>
