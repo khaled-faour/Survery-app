@@ -53,7 +53,7 @@ class SurveyController extends Controller
     }
     public function get($id){
 
-        $survey = Survey::where('id', $id)->with('questions.options')->get();
+        $survey = Survey::where('closed_at', null)->with('questions.options')->get()->find($id);
         return response()->json($survey, 200);
     }
     
