@@ -18,10 +18,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::post('register', 'register');
@@ -29,6 +25,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
     Route::post('check', 'check');
 
+});
+
+
+Route::controller(SurveyController::class)->group(function(){
+    Route::get('survey', 'getAll')->name('survey.getAll');
+    Route::get('survey/{id}', 'get')->name('survey.getAll');
 });
 
 Route::middleware('role.admin')->group(function(){

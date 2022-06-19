@@ -51,4 +51,17 @@ class SurveyController extends Controller
             "status"=>"success"
         ], 200);
     }
+    public function get($id){
+
+        $survey = Survey::where('id', $id)->with('questions.options')->get();
+        return response()->json($survey, 200);
+    }
+    
+    public function getAll(){
+        $surveys = Survey::with('questions.options')->get();
+
+        return response()->json([
+            'surveys'=>$surveys
+        ]);
+    }
 }

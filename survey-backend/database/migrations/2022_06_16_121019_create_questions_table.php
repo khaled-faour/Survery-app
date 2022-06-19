@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignID('survey_id')->constrained('surveys');
             $table->string('question');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('type');
             $table->boolean("isMultiple");
             $table->boolean("isDropdown");
