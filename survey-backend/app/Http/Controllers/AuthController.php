@@ -11,7 +11,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login','register', 'check']]);
     }
 
     public function login(Request $request)
@@ -87,6 +87,10 @@ class AuthController extends Controller
                 'type' => 'bearer',
             ]
         ]);
+    }
+
+    public function check(){
+        return response()->json(['valid'=>Auth::check()]);
     }
 
 }
