@@ -64,4 +64,16 @@ class SurveyController extends Controller
             'surveys'=>$surveys
         ]);
     }
+
+    public function close(Request $request){
+        $survey = Survey::find($request->id);
+        $survey->closed_at = now();
+        $survey->save();
+
+        $surveys = Survey::Where('user_id', Auth::user()->id)->get();
+        return response()->json([
+            "status"=>"success",
+            "surveys"=>$surveys
+        ], 200);
+    }
 }

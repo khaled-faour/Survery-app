@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id')->constrained('questions');
-            $table->foreignId('option_id')->constrained('options')->nullable();
+            $table->foreignId('option_id')->nullable()->constrained('options');
             $table->text('text_answer')->nullable();
             $table->softDeletes();
             $table->timestamps();

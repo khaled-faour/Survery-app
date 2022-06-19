@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnswerController;
 
 
 /*
@@ -33,9 +34,15 @@ Route::controller(SurveyController::class)->group(function(){
     Route::get('survey/{id}', 'get')->name('survey.getAll');
 });
 
+Route::controller(AnswerController::class)->group(function(){
+    Route::post('answer', 'add')->name('answers.add');
+   
+});
+
 Route::middleware('role.admin')->group(function(){
     Route::controller(SurveyController::class)->group(function(){
         Route::post('survey', 'add')->name('survey.add');
+        Route::post('survey/close', 'close')->name('survey.close');
     });
     Route::controller(UserController::class)->group(function(){
         Route::get('user/surveys', 'get')->name('user.surveys');
