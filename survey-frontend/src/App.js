@@ -9,6 +9,7 @@ import Login from "./screens/login";
 import AddSurvey from "./screens/addSurvey";
 import TakeSurvey from "./screens/takeSurvey";
 import Home from "./screens/home";
+import MySurveys from "./screens/mySurveys";
 import axios from 'axios';
 
 const App = () => {
@@ -45,7 +46,7 @@ const App = () => {
                     <AddSurvey/>
                   </questionsContext.Provider>
               } />
-              <Route path="/mySurveys" element={<>My Surveys</>}/>
+              <Route path="/mySurveys" element={<MySurveys/>}/>
                 <Route path="/takeSurvey/:id" element={
                   <answersContext.Provider value={{answers, setAnswers}}>
                     <TakeSurvey/>
