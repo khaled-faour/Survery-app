@@ -29,10 +29,6 @@ const App = () => {
 
     checkToken();
   })
-
-  useEffect(()=>{
-    console.log(questions)
-  }, [questions])
   return (
     <div className="App">
       <userContext.Provider value={{user, setUser}}>
@@ -46,6 +42,7 @@ const App = () => {
                     <AddSurvey/>
                   </questionsContext.Provider>
               } />
+              <Route path="/mySurveys" element={<>My Surveys</>}/>
         </Routes>
       </userContext.Provider>
     </div>

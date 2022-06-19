@@ -8,6 +8,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [credentials, setCredentials] = useState({email: null, password: null})
+    const [disabled, setDisabled] = useState(false);
     const {user, setUser} = useContext(userContext)
     
     const change = (e)=>{
@@ -15,7 +16,7 @@ const Login = () => {
     }
     
     const submitLogin = async()=>{
-        console.log(credentials.email, ' ', credentials.password);
+        setDisabled(true);
         await axios.post('http://127.0.0.1:8000/api/login', credentials )
         .then(response=>{
             console.log(response)
@@ -30,19 +31,15 @@ const Login = () => {
         })
     }
 
-
-    useEffect(()=>{
-        console.log(credentials)
-    }, [credentials])
     return (
         <div className="center">
             <div className="header">
                 Login
             </div>
             <div className='form'>
-                <input type="text" placeholder="Email" name="email" onChange={change}/>
-                <input id="pswrd" type="password" placeholder="Password" name="password" onChange={change}/>
-                <input className='btn' type="submit" value="Sign in" onClick={submitLogin}/>
+                <input type="text" placeholder="Email" name="email" onChange={change} disabled={disabled}/>
+                <input id="pswrd" type="password" placeholder="Password" name="password" onChange={change} disabled={disabled}/>
+                <input className='btn' type="submit" value="Sign in" onClick={submitLogin} disabled={disabled}/>
             </div>
         </div>
     )
